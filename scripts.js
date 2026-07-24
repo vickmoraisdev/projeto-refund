@@ -59,8 +59,22 @@ function expenseAdd(newExpense){
         expenseIcon.setAttribute('src', `img/${newExpense.category_id}.svg`)
         expenseIcon.setAttribute('alt', newExpense.category_name)
 
-        // Adiciona as informações no item
-        expenseItem.append(expenseIcon)
+        // Cria a info da despesa.
+        const expenseInfo = document.createElement('div')
+        expenseInfo.classList.add('expense-info')
+        // Cria o nome da despesa.
+        const expenseName = document.createElement('strong')
+        expenseName.textContent = newExpense.expense
+        // Cria a categoria da despesa.
+        const expenseCategory = document.createElement('span')
+        expenseCategory.textContent = newExpense.category_name
+
+        // Adiciona o nome e a categoria na div da info da despesa.
+        expenseInfo.append(expenseName, expenseCategory) 
+
+        // Adiciona as informações no item.
+        expenseItem.append(expenseIcon, expenseInfo)
+        // Adicona o item na lista.
         expenseList.append(expenseItem)
 
     } catch (error) {
