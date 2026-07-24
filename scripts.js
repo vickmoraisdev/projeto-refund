@@ -118,7 +118,7 @@ function upadateTotals() {
             const itemAmount = items[item].querySelector('.expense-amount')
             
             // Remove caracteres não números e vírgula por ponto.
-            let value = itemAmount.textContent.replace(/[^\d]/g, "").replace(',', '.')
+            let value = itemAmount.textContent.replace(/[^\d,]/g, "").replace(',', '.')
             console.log(itemAmount)
 
             // Converte o valor para float.
@@ -132,9 +132,18 @@ function upadateTotals() {
             // Incrementa o valor total
             total += Number(value)
         }
-        expenseTotal.textContent = total
+        
+        // Cria a small para adicionar o R$ formatado.
+        const symbolBRL = document.createElement('small')
+        symbolBRL.textContent = 'R$'
 
+        // Formata o valor e remove o R$ que será exibido pela small com estilo customizado.
+        total = formatCurrencyBRL(total).toUpperCase().replace('R$', "")
 
+        // Limpa o conteúdo do elemnto.
+        expenseTotal.innerHTML = ""
+
+        expenseTotal.append(symbolBRL, total)
     } catch (error) {
         alert("Não foi possível atualizar os totais de solicitações! Tente novemente mais tarde.")
         console.log(error)
