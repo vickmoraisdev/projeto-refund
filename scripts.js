@@ -117,7 +117,7 @@ function upadateTotals() {
         for(let item = 0; item < items.length; item++){
             const itemAmount = items[item].querySelector('.expense-amount')
             
-            // Remove caracteres não números e vírgula por ponto.
+            // Remove caracteres não numéricos e troca vírgula por ponto.
             let value = itemAmount.textContent.replace(/[^\d,]/g, "").replace(',', '.')
             console.log(itemAmount)
 
@@ -140,7 +140,7 @@ function upadateTotals() {
         // Formata o valor e remove o R$ que será exibido pela small com estilo customizado.
         total = formatCurrencyBRL(total).toUpperCase().replace('R$', "")
 
-        // Limpa o conteúdo do elemnto.
+        // Limpa o conteúdo do elemento.
         expenseTotal.innerHTML = ""
 
         expenseTotal.append(symbolBRL, total)
@@ -158,6 +158,8 @@ expenseList.addEventListener('click', function(event){
         const item = event.target.closest('.expense')
         // Remove o item clicado
         item.remove()
-        console.log(event)
+        
+        // Atualiza os totais.
+        upadateTotals()
     }
 })
